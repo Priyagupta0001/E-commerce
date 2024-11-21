@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts 
+  root 'home#new'
   get '/register', to: 'users#new'
   resources :users, only: [:create]
 

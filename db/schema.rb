@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_11_21_074323) do
+ActiveRecord::Schema[8.0].define(version: 2024_11_21_122436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "addresses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "zip_code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -24,4 +36,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_11_21_074323) do
     t.string "phone_number"
     t.boolean "status"
   end
+
+  add_foreign_key "addresses", "users"
 end

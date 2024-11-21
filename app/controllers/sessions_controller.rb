@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     
     if @user && @user.is_password?(user_params[:password])
       session[:user_id] = @user.id
-      redirect_to posts_path
+      redirect_to root_path
     else
       flash.now[:notice] = "Invalid email or password"
       render :new
