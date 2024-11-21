@@ -1,6 +1,7 @@
 class User < ApplicationRecord
     validates :email , uniqueness: true
     validates :email , presence: true
+    validates :phone_number, presence: true, format: { with: /\A\d{10}\z/, message: "must be 10 digits" }
     validates :password, length: { minimum: 5, allow_nil: true }
 
     def password

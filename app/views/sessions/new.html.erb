@@ -5,11 +5,24 @@
 <form action ="/sessions" method ="post">
   <input type ="hidden" name ="authenticity_token" value ="<%= form_authenticity_token %>">
 
+  <label for = "roleid"> RoleId</label>
+  <input type ="textfield" id ="roleid" name="user[roleid]" />
+  <br>
+  <label for = "fullname"> Full Name</label>
+  <input type ="textfield" id =" fullname" name="user[fullname]" />
+  <br>
   <label for = "email"> Email</label>
   <input type ="email" id =" email" name="user[email]" value ="<%= @user.email %>"/>
   <br>
   <label for = "password"> Passsword</label>
   <input type ="password" id =" password" name="user[password]" />
+  <br>
+  <label for = "phone_number"> Contact Number</label>
+  <input type ="textfield" id =" phone_number" name="user[phone_number]" />
+  <br>
+  <label for = "status"> Status</label>
+  <input type ="checkbox" id =" status" />
+ 
   
   <input type ="submit" value="Sign in">
 
