@@ -1,0 +1,8 @@
+<!-- app/views/users/show.html.erb -->
+<h1>Details of <%= @user.full_name %></h1>
+
+<p>Email: <%= @user.email %></p>
+<p>Phone: <%= @user.phone_number %></p>
+<!-- Add other user details here -->
+
+<%= link_to 'Back to Users', users_path %>  <!-- Back to users list -->
