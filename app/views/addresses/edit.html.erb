@@ -1,0 +1,44 @@
+
+<h1>Edit Address</h1>
+
+  <!-- Edit Address Form -->
+  <form action="/users/<%= @user.id %>/addresses/<%= @address.id %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <!-- Include CSRF token -->
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    
+    <div>
+      <label for="street">Street</label>
+      <input type="text" id="street" name="address[street]" value="<%= @address.street %>">
+    </div>
+
+    <div>
+      <label for="city">City</label>
+      <input type="text" id="city" name="address[city]" value="<%= @address.city %>">
+    </div>
+
+    <div>
+      <label for="state">State</label>
+      <input type="text" id="state" name="address[state]" value="<%= @address.state %>">
+    </div>
+
+    <div>
+      <label for="country">Country</label>
+      <input type="text" id="country" name="address[country]" value="<%= @address.country %>">
+    </div>
+
+    <div>
+      <label for="zip_code">Zip Code</label>
+      <input type="text" id="zip_code" name="address[zip_code]" value="<%= @address.zip_code %>">
+    </div>
+
+    <div>
+      <button type="submit">Update Address</button>
+    </div>
+  </form>
+
+<!-- Back to Addresses -->
+<form action="/users/<%= @user.id %>/addresses" method="get">
+    <button type="submit">Back to Addresses</button>
+</form>

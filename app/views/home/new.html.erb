@@ -1,7 +1,25 @@
 <% if current_user %>
   <p> Welcome to Home, <%= current_user.full_name %>! </p>
   <%= button_to "Sign Out", sign_out_path, method: :delete, class: "btn btn-danger" %>
+
+  <!-- Button to show all addresses of the current user -->
+  <%= button_to "Show All Addresses", user_addresses_path(current_user), method: :get, class: "btn btn-info" %>
+  
 <% else %>
   <input type="button" value="Register" onclick="window.location.href='<%= register_path %>'">
   <input type="button" value="Sign in" onclick="window.location.href='<%= sign_in_path %>'">
 <% end %>
+
+
+
+<% if current_user %>
+  <%= link_to 'Add New Address', new_user_address_path(current_user) %>
+
+<% else %>
+  <p>Please log in to view and manage your addresses.</p>
+<% end %>
+
+
+  <!-- Link to show all users -->
+  <%= link_to 'Show all users', users_path %>
+

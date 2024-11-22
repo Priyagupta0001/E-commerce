@@ -1,6 +1,15 @@
 class UsersController < ApplicationController
+
+  def index
+    @users = User.all  # All users fetch kar rahe hain
+  end
+  
   def new
     @user = User.new
+  end
+
+  def show
+    @user = User.find(params[:id])  # Find a specific user by ID
   end
 
   def create
