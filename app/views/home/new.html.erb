@@ -1,5 +1,6 @@
-<% if false %>
-  <input type="button" value="Sign Out" onclick="window.location.href='<%= sign_out_path %>'">
+<% if current_user %>
+  <p> Welcome to Home, <%= current_user.full_name %>! </p>
+  <%= button_to "Sign Out", sign_out_path, method: :delete, class: "btn btn-danger" %>
 <% else %>
   <input type="button" value="Register" onclick="window.location.href='<%= register_path %>'">
   <input type="button" value="Sign in" onclick="window.location.href='<%= sign_in_path %>'">
