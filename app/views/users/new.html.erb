@@ -1,0 +1,26 @@
+<p id = "notice"><%= notice %></p>
+
+<h1>Register</h1>
+
+<form action ="/users" method ="post">
+  <input type ="hidden" name ="authenticity_token" value ="<%= form_authenticity_token %>">
+
+  <label for = "roleid"> RoleId</label>
+  <input type ="textfield" id ="roleid" name="user[roleid]" />
+  <br>
+  <label for = "full_name"> Full Name</label>
+  <input type ="textfield" id =" full_name" name="user[full_name]" />
+  <br>
+  <label for = "email"> Email</label>
+  <input type ="email" id =" email" name="user[email]" value ="<%= @user.email %>"/>
+  <br>
+  <label for = "password"> Passsword</label>
+  <input type ="password" id =" password" name="user[password]" />
+  <br>
+  <label for = "phone_number"> Contact Number</label>
+  <input type ="textfield" id =" phone_number" name="user[phone_number]" />
+
+  
+  <input type ="submit" value="Register">
+
+</form>

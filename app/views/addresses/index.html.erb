@@ -1,0 +1,28 @@
+<p id = "notice"><%= notice %></p>
+
+<h1>Addresses for <%= @user.full_name %></h1>
+
+  <ul>
+    <% @addresses.each do |address| %>
+      <li>
+        <%= address.street %>, <%= address.city %>, <%= address.state %>, <%= address.zip_code %>, <%= address.country %>
+        
+        <!-- Form for editing an address -->
+        <form action="/users/<%= @user.id %>/addresses/<%= address.id %>/edit" method="get" style="display:inline;">
+          <button type="submit">Edit</button>
+        </form>
+
+        <!-- Form for deleting an address -->
+        <form action="/users/<%= @user.id %>/addresses/<%= address.id %>" method="post" style="display:inline;">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <input type="hidden" name="_method" value="delete">
+          <button type="submit" onclick="return confirm('Are you sure?');">Delete</button>
+        </form>
+      </li>
+    <% end %>
+  </ul>
+
+  <!-- Form for navigating back to users -->
+  <form action="<%= root_path %>" method="get">
+    <button type="submit">Back to Users</button>
+  </form>
