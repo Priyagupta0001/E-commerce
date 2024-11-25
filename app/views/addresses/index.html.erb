@@ -1,11 +1,6 @@
+<p id = "notice"><%= notice %></p>
 
 <h1>Addresses for <%= @user.full_name %></h1>
-
-  <!-- Form for adding a new address -->
-  <form action="/users/<%= @user.id %>/addresses/new" method="get">
-    <button type="submit">Add New Address</button>
-  </form>
-
 
   <ul>
     <% @addresses.each do |address| %>

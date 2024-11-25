@@ -1,3 +1,5 @@
+<p id = "notice"><%= notice %></p>
+
 <h1>Add Address</h1>
 <form action="/users/<%= current_user.id %>/addresses" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">

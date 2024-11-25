@@ -14,7 +14,8 @@ class AddressesController < ApplicationController
   def create
     @address = @user.addresses.new(address_params)
     if @address.save
-      redirect_to user_addresses_path, notice: 'Address added successfully!'
+      redirect_to user_addresses_path
+      flash[:notice]= 'Address added succesfully!'
     else
       render :new
     end
@@ -26,7 +27,8 @@ class AddressesController < ApplicationController
 
   def update
     if @address.update(address_params)
-      redirect_to user_addresses_path(@user), notice: 'Address updated successfully!'
+      redirect_to user_addresses_path(@user)
+      flash[:notice]= 'Address updated succesfully!'
     else
       render :edit
     end
@@ -34,7 +36,8 @@ class AddressesController < ApplicationController
 
   def destroy
     @address.destroy
-    redirect_to user_addresses_path, notice: 'Address deleted successfully!'
+    redirect_to user_addresses_path
+    flash[:notice]= 'Address deleted succesfully!'
   end
 
   private

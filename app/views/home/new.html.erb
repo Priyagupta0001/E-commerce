@@ -13,13 +13,10 @@
 
 
 <% if current_user %>
-  <%= link_to 'Add New Address', new_user_address_path(current_user) %>
-
+  <!-- Form for adding a new address -->
+  <form action="/users/<%= @user.id %>/addresses/new" method="get">
+    <button type="submit">Add New Address</button>
+  </form>
 <% else %>
   <p>Please log in to view and manage your addresses.</p>
 <% end %>
-
-
-  <!-- Link to show all users -->
-  <%= link_to 'Show all users', users_path %>
-

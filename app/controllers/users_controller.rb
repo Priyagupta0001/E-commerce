@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path
     else
-      flash.now[:notice] = @user.errors.full_messages.to_sentence
+     
       render :new
     end
   end
