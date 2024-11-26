@@ -4,7 +4,11 @@ class AddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
-    @addresses = @user.addresses
+    if @user.present?
+      @addresses = @user.addresses
+    else
+      @addresses = []
+    end
   end
 
   def new
@@ -14,40 +18,52 @@ class AddressesController < ApplicationController
   def create
     @address = @user.addresses.new(address_params)
     if @address.save
-      redirect_to user_addresses_path
-      flash[:notice]= 'Address added succesfully!'
+      flash[:notice] = 'Address added successfully!'
+      redirect_to user_addresses_path(@user)
     else
       render :new
     end
   end
 
   def edit
-    @address
   end
 
   def update
     if @address.update(address_params)
+      flash[:notice] = 'Address updated successfully!'
       redirect_to user_addresses_path(@user)
-      flash[:notice]= 'Address updated succesfully!'
     else
       render :edit
     end
   end
 
   def destroy
-    @address.destroy
-    redirect_to user_addresses_path
-    flash[:notice]= 'Address deleted succesfully!'
+    if @address.destroy
+      flash[:notice] = 'Address deleted successfully!'
+    else
+      flash[:alert] = 'Failed to delete address.'
+    end
+    redirect_to user_addresses_path(@user)
   end
 
   private
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
+    if @user.nil?
+      flash[:alert] = 'User not found.'
+      redirect_to root_path # Fallback route
+    end
   end
 
   def set_address
-    @address = @user.addresses.find(params[:id])
+    if @user.present?
+      @address = @user.addresses.find_by(id: params[:id])
+      if @address.nil?
+        flash[:alert] = 'Address not found.'
+        redirect_to user_addresses_path(@user)
+      end
+    end
   end
 
   def address_params

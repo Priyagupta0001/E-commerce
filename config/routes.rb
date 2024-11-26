@@ -9,9 +9,11 @@ Rails.application.routes.draw do
   resource :sessions, only: [:create]
 
   resources :users do
-    resources :addresses
+    resources :addresses #address show actions
   end
 
   resources :users, only: [:index, :show]  # Users ke liye index aur show action
+
+  resources :products
   
 end

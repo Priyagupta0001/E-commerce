@@ -8,3 +8,46 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+ /* Sidebar styles */
+aside {
+    border-right: 1px solid #ddd;
+  }
+  
+  aside .nav-link {
+    padding: 10px;
+    font-size: 16px;
+    color: #000;
+  }
+  
+  aside .nav-link:hover {
+    background-color: #f8f9fa;
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  aside h5 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Navbar styles */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  header input[type="search"] {
+    max-width: 300px;
+  }
+  
+  header .btn {
+    margin-right: 10px;
+  }
+  
+  /* General styles */
+  main {
+    padding: 20px;
+  }
+  

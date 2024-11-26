@@ -5,6 +5,9 @@
   <!-- Button to show all addresses of the current user -->
   <%= button_to "Show All Addresses", user_addresses_path(current_user), method: :get, class: "btn btn-info" %>
   
+  <h1><%= action_name.capitalize %> Product</h1>
+  <%= button_to 'Create Product', new_product_path, method: :get, class: 'btn btn-primary' %>
+  
 <% else %>
   <input type="button" value="Register" onclick="window.location.href='<%= register_path %>'">
   <input type="button" value="Sign in" onclick="window.location.href='<%= sign_in_path %>'">
@@ -12,11 +15,10 @@
 
 
 
-<% if current_user %>
-  <!-- Form for adding a new address -->
-  <form action="/users/<%= @user.id %>/addresses/new" method="get">
-    <button type="submit">Add New Address</button>
-  </form>
-<% else %>
-  <p>Please log in to view and manage your addresses.</p>
-<% end %>
+
+
+
+
+
+
+ 
