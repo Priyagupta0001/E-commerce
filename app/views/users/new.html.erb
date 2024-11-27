@@ -1,12 +1,13 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Register</h1>
 
 <form action="/users" method="post">
   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
 
   <label for="role_id">Role</label>
-  <input type="text" id="role_id" name="user[role_id]" value="customer" required />
+  <select id="role_id" name="user[role_id]" required>
+    <option value="0" <%= 'selected' if @user.role_id == 0 %>>Customer</option>
+    <option value="1" <%= 'selected' if @user.role_id == 1 %>>Admin</option>
+  </select>
   <br>
 
   <label for="full_name">Full Name</label>

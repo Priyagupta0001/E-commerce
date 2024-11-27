@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
   
   def new
-    @user = User.new
+    @user = User.new(role_id: 'customer') # Default role is customer
   end
 
   def show
@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+     # If you want to handle admin creation separately, you can add a condition here:
+    @user.role_id ||= 'customer' # Ensure that the default is 'customer' if not set
     if @user.save
       redirect_to root_path
     else
@@ -24,6 +26,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:role_id, :full_name, :email, :password, :phone_number)
+    params.require(:user).permit(:role_id, :full_name, :email, :password, :password_confirmation, :phone_number)
   end
 end

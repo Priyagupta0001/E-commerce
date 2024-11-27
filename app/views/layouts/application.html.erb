@@ -28,6 +28,67 @@
   </head>
 
   <body>
+    <nav>
+      <div class="px-3 py-2 bg-dark text-white">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+              <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+            </a>
+            <% if current_user.present? %>
+              <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                <p id="notice" class="left-align"><%= notice %></p>
+                <li>
+                  <%= link_to root_path, class: "nav-link text-white" do %>
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
+                    Home
+                  <% end %>
+                </li>
+                <li>
+                  <% if current_user.role_id == 1 %> <!-- Admin check -->
+                    <%= link_to new_product_path, class: "nav-link text-white" do %>
+                      <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
+                      Create Product
+                    <% end %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to  class: "nav-link text-white" do %>
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+                    Orders
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to  class: "nav-link text-white" do %>
+                    <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
+                    Carts
+                  <% end %>
+                </li>
+
+                  <li>
+                    <%= link_to user_addresses_path(current_user), class: "nav-link text-white" do %>
+                      <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+                      Address
+                    <% end %>
+                  </li>
+                  <li>
+                    <%= button_to sign_out_path, method: :delete, class: "nav-link text-white" do %>
+                      <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#box-arrow-right"/></svg>
+                      Sign Out
+                    <% end %>
+                  </li>
+              </ul>
+            <% else %>
+               <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+                <input type="button" value="Register" onclick="window.location.href='<%= register_path %>'" class="btn btn-light text-dark me-2">
+                <input type="button" value="Sign in" onclick="window.location.href='<%= sign_in_path %>'" class="btn btn-primary">
+               </ul>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </nav>
     <%= yield %>
   </body>
 </html>

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root 'home#new'
+  root 'products#index'
 
   get '/register', to: 'users#new'
-  resources :users, only: [:create]
+  resources :users, only: [:create, :index, :show]
 
   get '/sign_in', to: 'sessions#new'
   delete '/sign_out', to: 'sessions#destroy'
@@ -11,8 +11,6 @@ Rails.application.routes.draw do
   resources :users do
     resources :addresses #address show actions
   end
-
-  resources :users, only: [:index, :show]  # Users ke liye index aur show action
 
   resources :products
   
