@@ -1,17 +1,18 @@
 Rails.application.routes.draw do
+  # Root Route
   root 'products#index'
 
+  # User Routes
   get '/register', to: 'users#new'
-  resources :users, only: [:create, :index, :show]
+  resources :users, only: [:create, :index, :show] do
+    resources :addresses, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  end
 
+  # Session Routes
   get '/sign_in', to: 'sessions#new'
   delete '/sign_out', to: 'sessions#destroy'
   resource :sessions, only: [:create]
 
-  resources :users do
-    resources :addresses #address show actions
-  end
-
+  # Product Routes
   resources :products
-  
 end
