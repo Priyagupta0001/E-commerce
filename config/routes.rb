@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # User Routes
   get '/register', to: 'users#new'
   resources :users, only: [:create, :index, :show] do
-    resources :addresses, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+    resources :addresses
   end
 
   # Session Routes

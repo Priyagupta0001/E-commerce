@@ -9,7 +9,7 @@
  * Consider organizing styles into separate files for maintainability.
  */
  /* Sidebar styles */
-aside {
+  aside {
     border-right: 1px solid #ddd;
   }
   
@@ -50,4 +50,13 @@ aside {
   main {
     padding: 20px;
   }
+
+  .btn-margin {
+    margin: 10px;
+  }
+
+  .btn{
+    margin-top: 10px;
+  }
+  
   
