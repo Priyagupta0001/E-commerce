@@ -67,7 +67,7 @@
       </a>
 		
 		<% if current_user.present? %>
-		<ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+	    <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small w-100">
 		<li>
 		<%= link_to root_path, class: "nav-link text-white" do %>
 			<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
@@ -84,32 +84,33 @@
 		</li>
 		<li>
 		<%= link_to  class: "nav-link text-white" do %>
-			<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
+			<svg class="bi d-block mx-auto mb-1" display="flex" align-item ="center" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
 			Orders
 		<% end %>
 		</li>
 		<li>
 		<%= link_to  class: "nav-link text-white" do %>
-			<svg class="bi bi-cart mx-auto mb-1" width="24" height="24"><use xlink:href="#cart"/></svg>
+			<svg class="bi bi-cart mx-auto mb-1" display="flex" align-item ="center" width="24" height="24"><use xlink:href="#cart"/></svg>
 			Cart
 		<% end %>
 		</li>
 		<li>
 		<%= link_to user_addresses_path(current_user), class: "nav-link text-white" do %>
-			<svg class="bi bi-house-add mx-auto mb-1" width="24" height="24"><use xlink:href="#Address"/></svg>
+			<svg class="bi bi-house-add mx-auto mb-1" display="flex" align-item ="center" width="24" height="24"><use xlink:href="#Address"/></svg>
 			Address
 		<% end %>
 		</li>
-		<li>
-			<%= button_to sign_out_path, method: :delete, class: "nav-link" do %>
-			<svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-			Sign Out
-			<% end %>
-		</li>
+		<li style="margin-left:auto">
+        <%= button_to sign_out_path, method: :delete, class: "nav-link" do %>
+            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+            Sign Out
+        <% end %>
+        </li>
+
 		</ul>
 		
       <% else %>
-        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small w-100">
           <input type="button" value="Register" onclick="window.location.href='<%= register_path %>'" class="btn btn-light text-dark me-2">
           <input type="button" value="Sign in" onclick="window.location.href='<%= sign_in_path %>'" class="btn btn-primary">
         </ul>

@@ -1,39 +1,127 @@
-<%= form_with(model: @product, local: true, html: { enctype: "multipart/form-data" }) do |form| %>
-  <!-- Authenticity Token -->
-  <%= form.hidden_field :authenticity_token %>
+<!DOCTYPE html>
+<html lang="en">
 
-  <!-- Product Fields -->
-  <div>
-    <%= form.label :name, 'Name' %>
-    <%= form.text_field :name, required: true %>
-  </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
 
-  <div>
-    <%= form.label :description, 'Description' %>
-    <%= form.text_area :description, required: true %>
-  </div>
+  <!-- Add custom styles here -->
+  <style>
+    .gradient-custom {
+      background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    }
 
-  <div>
-    <%= form.label :price, 'Price' %>
-    <%= form.number_field :price, step: 0.01, required: true %>
-  </div>
+    .card-custom {
+      border-bottom-left-radius: 10% 50%;
+      border-top-left-radius: 10% 50%;
+      background-color: #f8f9fa;
+    }
 
-  <div>
-    <%= form.label :stock_quantity, 'Stock Quantity' %>
-    <%= form.number_field :stock_quantity, required: true %>
-  </div>
+    .input-custom {
+      background-color: white;
+    }
 
-  <div>
-    <%= form.label :main_image, 'Main Image' %>
-    <%= form.file_field :main_image, accept: 'image/*' %>
-  </div>
+    .white-text {
+      color: hsl(52, 0%, 98%);
+      font-weight: 100;
+      font-size: 14px;
+    }
 
-  <div>
-    <%= form.label :gallery_images, 'Gallery Images' %>
-    <%= form.file_field :gallery_images, accept: 'image/*', multiple: true %>
-  </div>
+    .back-button {
+      background-color: hsl(52, 0%, 98%);
+      font-weight: 700;
+      color: black;
+      margin-top: 50px;
+    }
+  </style>
 
-  <div>
-    <%= form.submit @product.new_record? ? "Save Product" : "Update Product" %>
+</head>
+
+<body>
+  <div class="row mt-3 mx-3" style="margin-top:25px;">
+    <div class="col-md-3">
+      <div style="margin-top: 50px; margin-left: 10px;" class="text-center">
+        <i id="animationDemo" data-mdb-animation="slide-right" data-mdb-toggle="animation"
+          data-mdb-animation-reset="true" data-mdb-animation-start="onScroll"
+          data-mdb-animation-on-scroll="repeat" class="fas fa-3x fa-shipping-fast text-white"></i>
+        <h3 class="mt-3 text-white">Welcome</h3>
+        <p class="white-text">Please provide your product details.</p>
+      </div>
+      <div class="text-center">
+        <%= link_to 'Go back', products_path, class: "btn btn-white btn-rounded back-button" %>
+      </div>
+
+    </div>
+
+    <div class="col-md-9 justify-content-center">
+      <div class="card card-custom pb-4">
+        <div class="card-body mt-0 mx-5">
+          <div class="text-center mb-3 pb-2 mt-3">
+            <h4 style="color: #495057;">Product Details</h4>
+          </div>
+
+          <!-- Product Form -->
+          <%= form_with(model: @product, local: true, html: { enctype: "multipart/form-data" }) do |form| %>
+            <form class="mb-0">
+              <div class="row mb-4">
+                <div class="col">
+                  <div data-mdb-input-init class="form-outline">
+                    <%= form.text_field :name, required: true, class: "form-control input-custom" %>
+                    <label class="form-label" for="form9Example1">Name</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <div data-mdb-input-init class="form-outline">
+                    <%= form.text_area :description, required: true, class: "form-control input-custom" %>
+                    <label class="form-label" for="form9Example2">Description</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <div data-mdb-input-init class="form-outline">
+                    <%= form.number_field :price, step: 0.01, required: true, class: "form-control input-custom" %>
+                    <label class="form-label" for="form9Example3">Price</label>
+                  </div>
+                </div>
+                <div class="col">
+                  <div data-mdb-input-init class="form-outline">
+                    <%= form.number_field :stock_quantity, required: true, class: "form-control input-custom" %>
+                    <label class="form-label" for="form9Example4">Stock Quantity</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <div data-mdb-input-init class="form-outline">
+                    <%= form.file_field :main_image, accept: 'image/*', class: "form-control input-custom" %>
+                    <label class="form-label" for="form9Example5">Main Image</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-4">
+                <div class="col">
+                  <div data-mdb-input-init class="form-outline">
+                    <%= form.file_field :gallery_images, accept: 'image/*', multiple: true, class: "form-control input-custom" %>
+                    <label class="form-label" for="form9Example6">Gallery Images</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="float-end">
+                <%= form.submit @product.new_record? ? "Save Product" : "Update Product", class: "btn btn-primary btn-rounded" %>
+              </div>
+
+            </form>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
   </div>
-<% end %>
+</body>
+
+</html>

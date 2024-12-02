@@ -1,35 +1,101 @@
-<h1>Addresses for <%= @user.full_name %></h1>
+<!DOCTYPE html>
+<html lang="en">
 
-  <ul>
-    <% @addresses.each do |address| %>
-      <li>
-        <%= address.street %>, <%= address.city %>, <%= address.state %>, <%= address.zip_code %>, <%= address.country %>
-        
-        <!-- Form for editing an address -->
-        <form action="/users/<%= @user.id %>/addresses/<%= address.id %>/edit" method="get" style="display:inline;">
-          <button type="submit">Edit</button>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Addresses for <%= @user.full_name %></title>
+  
+  <style>
+    .gradient-custom {
+      background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+    }
+
+    .card-custom {
+      border-bottom-left-radius: 10% 50%;
+      border-top-left-radius: 10% 50%;
+      background-color: #f8f9fa;
+    }
+
+    .input-custom {
+      background-color: white;
+    }
+
+    .white-text {
+      color: hsl(52, 0%, 98%);
+      font-weight: 100;
+      font-size: 14px;
+    }
+
+    .back-button {
+      background-color: hsl(52, 0%, 98%);
+      font-weight: 700;
+      color: black;
+      margin-top: 50px;
+    }
+
+    .address-list {
+      margin-top: 30px;
+    }
+
+    .address-item {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .address-item button {
+      margin-left: 10px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="col-md-9 justify-content-center" style="margin-top: 30px; margin-left: 150px;">
+  <div class="card card-custom pb-4">
+    <div class="card-body mt-0 mx-5">
+      <div class="text-center mb-3 pb-2 mt-3">
+        <h4 style="color: #495057;">Addresses for <%= @user.full_name %></h4>
+      </div>
+    
+      <div class="address-list">
+      <% @addresses.each do |address| %>
+        <div class="address-item">
+          <p><%= address.street %>, <%= address.city %>, <%= address.state %>, <%= address.zip_code %>, <%= address.country %></p>
+
+          <form action="/users/<%= @user.id %>/addresses/<%= address.id %>/edit" method="get" style="display:inline;">
+            <button type="submit" class="btn btn-primary btn-sm">Edit</button>
+          </form>
+
+          <form action="/users/<%= @user.id %>/addresses/<%= address.id %>" method="post" style="display:inline;">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <input type="hidden" name="_method" value="delete">
+            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</button>
+          </form>
+        </div>
+      <% end %>
+      </div>
+    
+
+      <% if current_user %>
+      <div class="text-center">
+        <form action="/users/<%= @user.id %>/addresses/new" method="get">
+          <button type="submit" class="btn btn-success btn-rounded">Add New Address</button>
         </form>
-
-        <!-- Form for deleting an address -->
-        <form action="/users/<%= @user.id %>/addresses/<%= address.id %>" method="post" style="display:inline;">
-          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <input type="hidden" name="_method" value="delete">
-          <button type="submit" onclick="return confirm('Are you sure?');">Delete</button>
+      </div>
+      <% else %>
+        <p class="text-center white-text">Please log in to view and manage your addresses.</p>
+      <% end %>
+      <div class="text-center mt-4">
+        <form action="<%= root_path %>" method="get">
+          <button type="submit" class="btn btn-secondary btn-rounded">Back to Home</button>
         </form>
-      </li>
-    <% end %>
-  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
 
-  <% if current_user %>
-  <!-- Form for adding a new address -->
-  <form action="/users/<%= @user.id %>/addresses/new" method="get">
-    <button type="submit">Add New Address</button>
-  </form>
-  <% else %>
-    <p>Please log in to view and manage your addresses.</p>
-  <% end %>
-
-  <!-- Form for navigating back to users -->
-  <form action="<%= root_path %>" method="get">
-    <button type="submit">Back to Home</button>
-  </form>
+</html>
