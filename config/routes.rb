@@ -15,4 +15,10 @@ Rails.application.routes.draw do
 
   # Product Routes
   resources :products
+
+  # Cart Routes
+  resource :cart, only: [:show] do
+    post 'add', to: 'cart#add'
+    post 'remove', to: 'cart#remove'
+  end
 end
