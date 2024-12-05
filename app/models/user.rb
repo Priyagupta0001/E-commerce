@@ -7,17 +7,23 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 5, allow_nil: true }, confirmation: true
 
     has_many :addresses, dependent: :destroy
+    has_one :cart, dependent: :destroy
+    after_create :create_cart
 
     def password
-        @password
+      @password
     end
 
     def password=(raw)
-        @password = raw
-        self.password_digest = BCrypt::Password.create(raw)
+      @password = raw
+      self.password_digest = BCrypt::Password.create(raw)
     end
 
     def is_password?(raw)
-        BCrypt::Password.new(password_digest).is_password?(raw)
+      BCrypt::Password.new(password_digest).is_password?(raw)
+    end
+
+    def create_cart
+      Cart.create(user: self)
     end
 end

@@ -8,12 +8,9 @@
         <p class="card-text">Price: $<%= product.price %></p>
         <%= link_to 'Show', product_path(product), class: 'btn btn-primary' %>
 
-        <!-- Add to Cart Button -->
-        <%= form_with url: add_cart_path, method: :post, class: "d-inline" do |f| %>
-          <%= hidden_field_tag :product_id, product.id %>
-          <%= submit_tag "Add to Cart", class: "btn btn-success" %>
-        <% end %> 
-
+         <!-- Add to Cart Button -->
+         <%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id), method: :post, class: 'btn btn-primary' %>
+    
         <% if current_user&.role_id == 1 %>
           <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
           <%= button_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>

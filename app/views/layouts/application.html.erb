@@ -57,7 +57,16 @@
 </symbol>
 </svg>
 
-<p id="notice" class="position-absolute text-white" style="top: 2px;"><%= notice %></p>
+<% if flash[:notice] %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% elsif flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <nav>
 <div class="px-3 py-2 bg-dark text-white">
   <div class="container">

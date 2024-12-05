@@ -1,10 +1,62 @@
-<h1><%= @product.name %></h1>
-<p><%= @product.description %></p>
-<p>Price: <%= number_to_currency(@product.price) %></p>
-<p>Stock: <%= @product.stock_quantity %></p>
+<!DOCTYPE html>
+<html lang="en">
 
-<% if @product.main_image.attached? %>
-  <%= image_tag @product.main_image %>
-<% end %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details</title>
 
-<%= link_to 'Back to Products', products_path %>
+  <style>
+    .product-card {
+      background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+      border-radius: 15px;
+      padding: 20px;
+      color: white;
+    }
+
+    .product-image {
+      display: block;
+      margin: 20px auto;
+    }
+
+    .product-details h1, 
+    .product-details p {
+      text-align: center;
+    }
+
+    .btn-custom {
+      background-color: #f8f9fa;
+      color: black;
+      font-weight: bold;
+      border-radius: 20px;
+      display: block;
+      margin: 20px auto;
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="product-card">
+          <div class="product-details">
+            <h1><%= @product.name %></h1>
+            <p><%= @product.description %></p>
+            <p>Price: <%= number_to_currency(@product.price) %></p>
+            <p>Stock: <%= @product.stock_quantity %></p>
+          </div>
+
+          <% if @product.main_image.attached? %>
+            <%= image_tag @product.main_image, class: "product-image", style: "width: 400px; height: 350px;" %>
+          <% end %>
+
+          <%= link_to 'Back to Products', products_path, class: "btn btn-custom" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
