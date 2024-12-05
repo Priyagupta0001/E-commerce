@@ -19,9 +19,6 @@ Rails.application.routes.draw do
   # Cart Routes
   resource :cart, only: [:show] do
     post 'add', to: 'carts#add', as: 'add_to'
-    post 'add_to_cart', to: 'products#add_to_cart', as: 'add_to_cart'
-
     post 'remove', to: 'carts#remove', as: 'remove_from'
-    get 'checkout', to: 'carts#checkout', as: 'checkout'
   end  
 end
