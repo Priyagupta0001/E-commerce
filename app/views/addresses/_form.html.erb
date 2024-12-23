@@ -15,7 +15,7 @@
     .card-custom {
       border-bottom-left-radius: 10% 50%;
       border-top-left-radius: 10% 50%;
-      background-color: #f8f9fa;
+      background: -webkit-linear-gradient(left, #721c1cbd, #00ceff5e);
     }
 
     .input-custom {
@@ -34,6 +34,13 @@
       color: black;
       margin-top: 50px;
     }
+    
+    .btn-primary {
+      color: #fff;
+      background-color: #1b1e21;
+      border-color: #f8f9fa;
+    }
+  
   </style>
 
 </head>
@@ -57,7 +64,7 @@
       <div class="card card-custom pb-4">
         <div class="card-body mt-0 mx-5">
           <div class="text-center mb-3 pb-2 mt-3">
-            <h4 style="color: #495057 ;">Delivery Details</h4>
+            <h4 style="color: #1b1e21 ;">Delivery Details</h4>
           </div>
 
           <%= form_with(model: [@user, @address], local: true) do |form| %>

@@ -13,6 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    # byebug
     @user = User.new(user_params)
      # If you want to handle admin creation separately, you can add a condition here:
     @user.role_id ||= 'customer' # Ensure that the default is 'customer' if not set

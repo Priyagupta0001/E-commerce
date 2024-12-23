@@ -92,7 +92,7 @@
 		<% end %>
 		</li>
 		<li>
-		<%= link_to  class: "nav-link text-white" do %>
+		<%= link_to orders_path, class: "nav-link text-white" do %>
 			<svg class="bi d-block mx-auto mb-1" display="flex" align-item ="center" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
 			Orders
 		<% end %>
@@ -110,11 +110,11 @@
 		<% end %>
 		</li>
 		<li style="margin-left:auto">
-        <%= button_to sign_out_path, method: :delete, class: "nav-link" do %>
-            <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-            Sign Out
-        <% end %>
-        </li>
+      <%= button_to sign_out_path, method: :delete, class: "nav-link" do %>
+      <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
+      Sign Out
+    <% end %>
+    </li>
 
 		</ul>
 		
@@ -128,6 +128,7 @@
   </div>
 </div>
 </nav>
+
 <%= yield %>
 
 </body>

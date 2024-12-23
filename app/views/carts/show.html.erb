@@ -15,7 +15,7 @@
     .card-custom {
       border-bottom-left-radius: 10% 50%;
       border-top-left-radius: 10% 50%;
-      background-color: #f8f9fa;
+      background: -webkit-linear-gradient(left, #721c1cbd, #00ceff5e);
     }
 
     .input-custom {
@@ -42,7 +42,8 @@
       margin-top: 20px;
     }
 
-    th, td {
+    th,
+    td {
       text-align: left;
       padding: 12px;
       border-bottom: 1px solid #ddd;
@@ -69,12 +70,17 @@
     }
 
     .btn-danger {
-      background-color: #e74c3c;
+      background-color: #1b1e21;
       color: white;
     }
 
     .btn-secondary {
-      background-color: #7f8c8d;
+      background-color: #6c757d;
+      color: white;
+    }
+
+    .btn-success {
+      background-color: #004085;
       color: white;
     }
   </style>
@@ -84,11 +90,10 @@
   <div class="row mt-3 mx-3" style="margin-top:25px;">
     <div class="col-md-3">
       <div style="margin-top: 50px; margin-left: 10px;" class="text-center">
-        <i id="animationDemo" data-mdb-animation="slide-right" data-mdb-toggle="animation"
-           data-mdb-animation-reset="true" data-mdb-animation-start="onScroll"
+        <i id="animationDemo" data-mdb-animation="slide-right" data-mdb-toggle="animation" data-mdb-animation-reset="true" data-mdb-animation-start="onScroll"
            data-mdb-animation-on-scroll="repeat" class="fas fa-3x fa-shopping-cart text-white"></i>
         <h3 class="mt-3 text-white">Shopping Cart</h3>
-        <p class="white-text">Review your items before proceeding to checkout.</p>
+        <p class="white-text">Select an address to proceed to payment.</p>
       </div>
     </div>
 
@@ -96,12 +101,27 @@
       <div class="card card-custom pb-4">
         <div class="card-body mt-0 mx-5">
           <div class="text-center mb-3 pb-2 mt-3">
-            <h4 style="color: #495057;">Your Cart</h4>
+            <h4 style="color: #1b1e21;">Your Cart</h4>
           </div>
 
           <% if @cart_items.empty? %>
             <p>Your cart is empty.</p>
           <% else %>
+
+           <!-- Address Dropdown -->
+            <div class="mt-4">
+              <h5>Select Address</h5>
+              <%= form_with url: select_address_path, method: :post, local: true do %>
+                <div class="form-group">
+                  <%= select_tag :selected_address,
+                  options_from_collection_for_select(@addresses, 'id', 'street', @selected_address),
+                  include_blank: 'Select Address',
+                  class: 'form-control',
+                  onchange: "window.location.href='?selected_address=' + this.value" %>
+                </div>
+              <% end %>
+            </div>
+
             <table>
               <thead>
                 <tr>
@@ -129,11 +149,12 @@
 
             <p>Total Price: $<%= @total_price %></p>
 
-            <%= form_with url: checkout_cart_path, method: :get do %>
-              <%= submit_tag 'Proceed to Checkout', class: 'btn btn-primary' %>
+            <!-- Payment Button (Shown Only If Address Is Selected) -->
+            <% if @selected_address.present? %>
+              <%= link_to 'Proceed to Payment', checkout_payments_path, class: 'btn btn-primary mt-3' %>
             <% end %>
 
-            <%= link_to 'Back to Products', products_path, class: 'btn btn-secondary' %>
+            <%= link_to 'Back to Products', products_path, class: 'btn btn-secondary mt-3' %>
           <% end %>
         </div>
       </div>

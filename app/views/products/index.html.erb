@@ -1,22 +1,123 @@
-<div class="card-deck", style="margin: 20px 20px 20px; padding: 10px 10px 10px 10px; display: grid; grid-template-columns: repeat(3, 1fr);">
-  <% @products.each do |product| %>
-    <div class="card">
-			<%= image_tag product.main_image, class: "card-img-top", alt: product.name %>
-      <div class="card-body" >
-        <h5 class="card-title"><%= product.name %></h5>
-        <p class="card-description"><%= product.description %></p>
-        <p class="card-text">Price: $<%= product.price %></p>
-        <%= link_to 'Show', product_path(product), class: 'btn btn-primary' %>
+<!DOCTYPE html>
+<html lang="en">
 
-         <!-- Add to Cart Button -->
-         <%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id), method: :post, class: 'btn btn-primary' %>
-    
-        <% if current_user&.role_id == 1 %>
-          <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
-          <%= button_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Listing</title>
+
+  <!-- Internal CSS -->
+  <style>
+    /* Card Deck Styling */
+    .card-deck {
+      margin: 20px;
+      padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Individual Card Styling */
+    .card {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+
+    .card:hover {
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+    }
+
+    /* Card Image Styling */
+    .card-img-top {
+      object-fit: cover;
+      border-bottom: 1px solid #ddd; /* Divider below image */
+    }
+
+    /* Card Body Styling */
+    .card-body {
+      background-color: #f8f9fa;
+      text-align: center;
+    }
+
+    /* Button Styling */
+    .btn {
+      margin: 5px 0;
+      width: 100%;
+      border-radius: 20px; /* Rounded buttons */
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: #856404; /* Golden-Brown Color */
+      border-color: #856404;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #6c5203; /* Darker Shade on Hover */
+      transform: scale(1.05); /* Slight Zoom Effect */
+    }
+
+    .btn-secondary {
+      color: #fff;
+      background-color: #005585;
+      border-color: #f8f9fa;
+    }
+
+    .btn-warning {
+      background-color: #28a7a2;
+      color: white;
+      transition: none; /* Disable hover effect */
+    }
+
+    .btn-warning:hover {
+      background-color: #28a7a2; /* No color change on hover */
+      transform: scale(1.05); /* Slight Zoom Effect */
+    }
+
+    .btn-danger {
+      background-color: #e74c3c;
+      color: white;
+      transition: none; /* Disable hover effect */
+    }
+
+    .btn-danger:hover {
+      background-color: #e74c3c; /* No color change on hover */
+      transform: scale(1.05); /* Slight Zoom Effect */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card-deck">
+    <% @products.each do |product| %>
+      <div class="card">
+        <% if product.main_image.attached? %>
+          <%= image_tag rails_blob_path(product.main_image, only_path: true), class: "card-img-top", alt: product.name %>
+        <% else %>
+          <%= image_tag 'default-image.png', class: "card-img-top", alt: product.name %>
         <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+        
+        <div class="card-body">
+          <h5 class="card-title"><%= product.name %></h5>
+          <p class="card-description"><%= product.description %></p>
+          <p class="card-text">Price: $<%= sprintf('%.2f', product.price) %></p>
+          <%= link_to 'Show', product_path(product), class: 'btn btn-secondary' %>
 
+          <!-- Add to Cart Button -->
+          <%= button_to 'Add to Cart', add_to_cart_path(product_id: product.id), method: :post, class: 'btn btn-primary' %>
+
+          <% if current_user&.role_id == 1 %>
+            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-warning" %>
+            <%= button_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</body>
+
+</html>

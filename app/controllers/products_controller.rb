@@ -7,7 +7,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
   end
-
+  
   # GET /products/:id
   def show
   end
@@ -25,7 +25,7 @@ class ProductsController < ApplicationController
   def create
     if current_user&.role_id == 1
       @product = Product.new(product_params)
-
+      @product.image.attach(params[:product][:image])
       if @product.save
         flash[:notice] = 'Product was successfully created.'
         redirect_to @product
@@ -58,10 +58,10 @@ class ProductsController < ApplicationController
   def destroy
     if @product.destroy
       flash[:notice] = 'Product was successfully destroyed.'
-      redirect_to products_url
+      redirect_to products_path
     else
       flash[:alert] = 'Failed to destroy product.'
-      redirect_to products_url
+      redirect_to products_path
     end
   end
 

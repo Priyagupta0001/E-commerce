@@ -7,8 +7,18 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 5, allow_nil: true }, confirmation: true
 
     has_many :addresses, dependent: :destroy
+
     has_one :cart, dependent: :destroy
     after_create :create_cart
+
+    after_create :send_welcome_email
+
+    has_many :orders
+
+    has_many :credit_cards, dependent: :destroy
+
+    before_create :assign_customer_id
+    validates :role_id, presence: true
 
     def password
       @password
@@ -25,5 +35,14 @@ class User < ApplicationRecord
 
     def create_cart
       Cart.create(user: self)
+    end
+
+    def send_welcome_email
+      SendWelcomeEmailJob.perform_later(self)
+    end
+
+    def assign_customer_id
+      customer = Stripe::Customer.create(email: email)
+      # self.customer_id = customer.id
     end
 end

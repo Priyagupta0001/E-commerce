@@ -14,7 +14,7 @@
     .card-custom {
       border-bottom-left-radius: 10% 50%;
       border-top-left-radius: 10% 50%;
-      background-color: #f8f9fa;
+      background: -webkit-linear-gradient(left, #721c1cbd, #00ceff5e);
     }
 
     .input-custom {
@@ -49,6 +49,17 @@
     .address-item button {
       margin-left: 10px;
     }
+
+    .btn-secondary{
+      color: #fff;
+      background-color: #495057;
+      border-color: #6c757d;
+    }
+
+    .btn-success{
+      color: #fff;
+      background-color: #1b1e21;
+    }
   </style>
 </head>
 
@@ -57,7 +68,7 @@
   <div class="card card-custom pb-4">
     <div class="card-body mt-0 mx-5">
       <div class="text-center mb-3 pb-2 mt-3">
-        <h4 style="color: #495057;">Addresses for <%= @user.full_name %></h4>
+        <h4 style="color: #1b1e21;">Addresses for <%= @user.full_name %></h4>
       </div>
     
       <div class="address-list">

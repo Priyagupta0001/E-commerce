@@ -1,4 +1,7 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
+  resources :credit_cards
   # Root Route
   root 'products#index'
 
@@ -21,4 +24,22 @@ Rails.application.routes.draw do
     post 'add', to: 'carts#add', as: 'add_to'
     post 'remove', to: 'carts#remove', as: 'remove_from'
   end  
+
+  post '/select_address', to: 'carts#select_address', as: 'select_address'
+
+  # Orders Routes
+  resources :orders, only: [:index, :create, :show]
+
+  # Sidekiq Web UI 
+  mount Sidekiq::Web => '/sidekiq'  
+
+  resources :credit_cards
+
+  resources :payments, only: [] do
+    collection do
+      get :checkout
+      get :success
+      get :cancel
+    end
+  end
 end
