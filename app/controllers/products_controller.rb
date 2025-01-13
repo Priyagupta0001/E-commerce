@@ -25,7 +25,8 @@ class ProductsController < ApplicationController
   def create
     if current_user&.role_id == 1
       @product = Product.new(product_params)
-      @product.image.attach(params[:product][:image])
+      # debugger
+      @product.main_image.attach(params[:product][:main_image])
       if @product.save
         flash[:notice] = 'Product was successfully created.'
         redirect_to @product
