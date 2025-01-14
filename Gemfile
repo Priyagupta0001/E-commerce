@@ -61,7 +61,7 @@ gem "sidekiq", "~> 7.3"
 gem 'redis'
 
 group :development, :test do
-  gem 'rspec-rails', '~> 7.0.0'
+  gem 'rspec-rails', '~> 7.1.0'
 end
 
 gem 'stripe'
